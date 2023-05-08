@@ -29,7 +29,7 @@ function requestToEditUser(user) {
             console.log(info)
         },
         error: function (error) {
-            showError(error.responseText)
+            showErrorEdit(error.responseText)
         }
     });
 }
@@ -143,7 +143,7 @@ function drawEditModalWindow(user) {
 
 }
 
-function showError (error){
+function showErrorEdit (error){
     let errorInfo = JSON.parse(error)
     console.log(error)
     console.log(errorInfo)
@@ -154,5 +154,6 @@ function showError (error){
                             </button>
                         </div>`;
     $('#editModal').prepend(alert);
+    $('#modalEdit').show();
 
 }

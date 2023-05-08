@@ -48,12 +48,12 @@ function requestToCreateUser(data) {
         },
         error: function (error) {
             console.log(error)
-            showError(error.responseText)
+            showErrorCreate(error.responseText)
         }
     });
 }
 
-function showError (error){
+function showErrorCreate (error){
     let errorInfo = JSON.parse(error)
     console.log(error)
     console.log(errorInfo)
@@ -64,5 +64,6 @@ function showError (error){
                             </button>
                         </div>`;
    $('#bodyCreateModal').prepend(alert);
+    $('#exampleModal').show();
 
 }
