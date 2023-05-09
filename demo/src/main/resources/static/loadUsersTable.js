@@ -25,6 +25,8 @@ function drawTableUsers(users) {
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>VK ID</th>
+            <th>Count of vk video</th>
             <th>Age</th>
             <th>Role</th>
             <th>Edit</th>
@@ -49,6 +51,8 @@ function drawTableUsers(users) {
             <td class="table-active">${users[i].id}</td>
             <td class="table-active">${users[i].username}</td>
             <td class="table-active">${users[i].email}</td>
+            <td class="table-active">${users[i].vkOwnerId}</td>
+            <td class="table-active">${users[i].countOfVideo}</td>
             <td class="table-active">${users[i].age}</td>
             <td class="table-active">${allRoles} </td>
             <td class="table-active"><button type="submit" class="btn btn-primary" onclick="requestToFindUserEdit(${users[i].id});"  data-toggle="modal" data-target="#modalEdit">Edit</button></td>

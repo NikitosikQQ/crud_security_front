@@ -19,7 +19,7 @@ public class User implements UserDetails {
     private Long id;
 
     @NotEmpty(message = "Имя пользователя должно быть заполнено")
-    @Size(min = 2, max = 16, message = "Имя пользователя должно содержать от 2 до 16 символов" )
+    @Size(min = 2, max = 16, message = "Имя пользователя должно содержать от 2 до 16 символов")
     @Column
     private String name;
 
@@ -31,10 +31,19 @@ public class User implements UserDetails {
     @Min(value = 6, message = "Возраст должен быть от 6 лет")
     @Column
     private int age;
+
+    @NotNull(message = "OwnerId должен быть заполнен")
+    @Min(value = 8, message = "OwnerId должен быть от 8 символов")
+    @Column
+    private long vkOwnerId;
     @NotEmpty(message = "Пароль не должен быть пустым")
     @Size(min = 4, message = "Пароль должен содержать от 4 символов")
     @Column
     private String password;
+
+    @Column
+    private int countOfVideo;
+
     @NotEmpty(message = "Роль должна быть заполнена")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
@@ -47,25 +56,15 @@ public class User implements UserDetails {
 
     }
 
-    public User(String name, String email, int age, String password, Set<Role> roles) {
+    public User(String name, String email, int age, long vkOwnerId, String password, Set<Role> roles) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.age = age;
+        this.vkOwnerId = vkOwnerId;
         this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                '}';
-    }
 
     public Long getId() {
         return id;
@@ -109,6 +108,22 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Long getVkOwnerId() {
+        return vkOwnerId;
+    }
+
+    public void setVkOwnerId(Long vkOwnerId) {
+        this.vkOwnerId = vkOwnerId;
+    }
+
+    public int getCountOfVideo() {
+        return countOfVideo;
+    }
+
+    public void setCountOfVideo(int countOfVideo) {
+        this.countOfVideo = countOfVideo;
     }
 
     @Override

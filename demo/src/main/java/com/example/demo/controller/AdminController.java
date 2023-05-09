@@ -4,6 +4,7 @@ import com.example.demo.user.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.UserErrorResponse;
 import com.example.demo.util.UserException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,27 +37,18 @@ public class AdminController {
 
     @PostMapping("/user-create")
     public ResponseEntity<HttpStatus> createUser(@RequestBody @Valid User user,
-                                                 BindingResult bindingResult) {
+                                                 BindingResult bindingResult) throws JsonProcessingException {
         if (bindingResult.hasErrors()) {
-            StringBuilder errorMsg = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMsg
-                        .append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(";");
-            }
-            throw new UserException(errorMsg.toString());
+            messageErrorBindingResult(bindingResult);
         }
         userService.saveUser(user);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/user-delete/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
-        HttpStatus status = userService.deleteUserById(id);
-        return ResponseEntity.ok(status);
+        userService.deleteUserById(id);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/user/{id}")
@@ -64,30 +56,33 @@ public class AdminController {
         return userService.findUserById(id);
     }
 
-
-    @PostMapping("/user-update")
-    public ResponseEntity<HttpStatus> updateUser(@RequestBody @Valid User user, BindingResult bindingResult) {
+    @PutMapping ("/user-update")
+    public ResponseEntity<HttpStatus> updateUser(@RequestBody @Valid User user, BindingResult bindingResult) throws JsonProcessingException {
         if (bindingResult.hasErrors()) {
-            StringBuilder errorMsg = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMsg
-                        .append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(";")
-                        .append("\n");
-            }
-            throw new UserException(errorMsg.toString());
+            messageErrorBindingResult(bindingResult);
         }
         userService.updateUser(user);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     @ExceptionHandler
     private ResponseEntity<UserErrorResponse> userException(UserException e) {
         UserErrorResponse response = new UserErrorResponse(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    private String messageErrorBindingResult(BindingResult bindingResult) {
+        StringBuilder errorMsg = new StringBuilder();
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            errorMsg
+                    .append(error.getField())
+                    .append(" - ")
+                    .append(error.getDefaultMessage())
+                    .append(";")
+                    .append("\n");
+        }
+        throw new UserException(errorMsg.toString());
     }
 }
 

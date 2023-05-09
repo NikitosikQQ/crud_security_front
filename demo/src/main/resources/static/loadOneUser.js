@@ -36,6 +36,8 @@ function drawTableUser(user) {
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>VK ID</th>
+            <th>Count of vk video</th>
             <th>Age</th>
             <th>Role</th>
         </tr>
@@ -45,6 +47,8 @@ function drawTableUser(user) {
             <td class="table-active">${user.id}</td>
             <td class="table-active">${user.username}</td>
             <td class="table-active">${user.email}</td>
+            <td class="table-active">${user.vkOwnerId}</td>
+            <td class="table-active">${user.countOfVideo}</td>
             <td class="table-active">${user.age}</td>
             <td class="table-active">${allRoles} </td>
         </tr>

@@ -18,7 +18,7 @@ function requestToFindUserEdit(id) {
 function requestToEditUser(user) {
     return $.ajax({
         url: 'http://localhost:8080/admin/user-update/',
-        type: 'POST',
+        type: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -69,6 +69,14 @@ function drawEditModalWindow(user) {
                             <label for="age">Age</label>
                             <input type="number" required class="form-control" id="ageEdit" value="${user.age}" >
                         </div>
+                        <div class="form-group">
+                            <label for="vkOwnerId">VK Owner Id</label>
+                            <input type="number" required class="form-control" id="vkOwnerIdEdit" value="${user.vkOwnerId}">
+                        </div>
+                        <div class="form-group">
+                            <label for="vkOwnerId">Count of vk video</label>
+                            <input type="number" readonly class="form-control" id="countOfVideoEdit" value="${user.countOfVideo}">
+                        </div>
                         <div class="form-froup">
                             <label for="Newroles" class="com-form-label">New Roles:</label>
                             <br/>
@@ -104,6 +112,7 @@ function drawEditModalWindow(user) {
         let email1 = editUserForm.find('#emailEdit').val();
         let password1 = editUserForm.find('#passwordEdit').val();
         let age1 = editUserForm.find('#ageEdit').val();
+        let vkOwnerId1 = editUserForm.find('#vkOwnerIdEdit').val();
         let checkedRoles = () => {
             let array = []
             let options = document.querySelector('#Newroles').options
@@ -115,16 +124,17 @@ function drawEditModalWindow(user) {
             return array;
         }
 
-        if (!(name1 === '') && !(email1 === '') && age1 != 0 && checkedRoles().length != 0 && !(password1 === '')) {
+        if (!(name1 === '') && !(email1 === '') && age1 != 0 && vkOwnerId1 != 0 && checkedRoles().length != 0 && !(password1 === '')) {
             let data = {
                 id: id1,
                 name: name1,
                 age: age1,
                 password: password1,
                 email: email1,
+                vkOwnerId: vkOwnerId1,
                 roles: checkedRoles()
             }
-            console.log(id1, name1, email1, age1)
+            console.log(id1, name1, email1, age1, vkOwnerId1)
             requestToEditUser(data);
         }
     });

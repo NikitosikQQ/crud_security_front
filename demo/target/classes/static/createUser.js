@@ -9,6 +9,7 @@ $('#addUserButton').click(async () => {
     let password1 = addUserForm.find('#password').val().trim();
     let email1 = addUserForm.find('#email').val().trim();
     let age1 = addUserForm.find('#age').val().trim();
+    let vkOwnerId1 = addUserForm.find('#vkOwnerId').val().trim();
     let checkedRoles = () => {
         let array = []
         let options = document.querySelector('#roles').options
@@ -19,11 +20,12 @@ $('#addUserButton').click(async () => {
         }
         return array;
     }
-    if (!(name1 === '') && !(password1 === '') && !(email1 === '') && age != 0 && checkedRoles().length != 0) {
+    if (!(name1 === '') && !(password1 === '') && !(email1 === '') && age != 0 && vkOwnerId1 != 0 && checkedRoles().length != 0) {
         let data = {
             name: name1,
             password: password1,
             age: age1,
+            vkOwnerId: vkOwnerId1,
             email: email1,
             roles: checkedRoles()
         }
@@ -53,7 +55,7 @@ function requestToCreateUser(data) {
     });
 }
 
-function showErrorCreate (error){
+function showErrorCreate(error) {
     let errorInfo = JSON.parse(error)
     console.log(error)
     console.log(errorInfo)
@@ -63,7 +65,7 @@ function showErrorCreate (error){
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>`;
-   $('#bodyCreateModal').prepend(alert);
+    $('#bodyCreateModal').prepend(alert);
     $('#exampleModal').show();
 
 }
