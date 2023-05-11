@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.user.User;
+import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.UserErrorResponse;
 import com.example.demo.util.UserException;
@@ -8,14 +8,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
 
 

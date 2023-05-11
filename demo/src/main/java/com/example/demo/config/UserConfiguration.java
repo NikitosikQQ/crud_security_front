@@ -2,9 +2,8 @@ package com.example.demo.config;
 
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.service.UserService;
-import com.example.demo.user.Role;
-import com.example.demo.user.User;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.model.Role;
+import com.example.demo.model.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
