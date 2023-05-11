@@ -1,6 +1,5 @@
-package com.example.demo.VK;
+package com.example.demo.dto;
 
-import com.example.demo.VK.VKResponse;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

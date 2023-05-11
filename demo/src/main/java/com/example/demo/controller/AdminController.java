@@ -2,8 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
-import com.example.demo.util.UserErrorResponse;
-import com.example.demo.util.UserException;
+import com.example.demo.exceptions.UserErrorResponse;
+import com.example.demo.exceptions.UserException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
