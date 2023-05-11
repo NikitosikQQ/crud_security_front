@@ -2,13 +2,13 @@ package com.example.demo.VK;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class VKVideoItems {
+public class VKVideoItem {
     private long date;
     private String ownerId;
 
-    public VKVideoItems(@JsonProperty("date") long date, @JsonProperty("owner_id") String ownerId) {
+    public VKVideoItem(@JsonProperty("date") long date, @JsonProperty("owner_id") String ownerId) {
         this.date = date;
         this.ownerId = ownerId;
     }

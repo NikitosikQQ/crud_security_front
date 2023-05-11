@@ -1,6 +1,5 @@
 package com.example.demo.VK;
 
-import com.example.demo.VK.VKVideoItems;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -10,14 +9,14 @@ import java.util.List;
 @JsonRootName(value = "response")
 public class VKResponse {
 
-    private List<VKVideoItems> items;
+    private List<VKVideoItem> items;
     private int count;
 
-        public List<VKVideoItems> getItems() {
+        public List<VKVideoItem> getItems() {
                 return items;
         }
 
-        public void setItems(List<VKVideoItems> items) {
+        public void setItems(List<VKVideoItem> items) {
                 this.items = items;
         }
 
