@@ -12,17 +12,20 @@ import java.util.List;
 @Service
 public class VKService {
 
+    private static final String VK_API_HOST = "https://api.vk.com";
+    private static final String VK_API_METHOD_VIDEO_GET_BY_OWNER = "/method/video.get?owner_id=";
+    private static final String VK_API_ACCESS_TOKEN = "&access_token=" + System.getenv("VK_TOKEN");
+    private static final String VK_API_VERSION = "&v=5.167";
 
     public int getCountOfVideosByOwnerId(long vkId) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
         StringBuilder requestToVk = new StringBuilder();
         requestToVk
-                .append("https://api.vk.com/method/video.get")
-                .append("?owner_id=")
+                .append(VK_API_HOST)
+                .append(VK_API_METHOD_VIDEO_GET_BY_OWNER)
                 .append(vkId)
-                .append("&access_token=")
-                .append(System.getenv("VK_TOKEN"))
-                .append("&v=5.167");
+                .append(VK_API_ACCESS_TOKEN)
+                .append(VK_API_VERSION);
         ObjectMapper mapper = new ObjectMapper();
         VKJson vkJson = mapper.readValue(restTemplate.getForObject(requestToVk.toString(), String.class), VKJson.class);
         int countOfVideo = vkJson.getResponse().getCount(); //проверка наличия видео на странице
